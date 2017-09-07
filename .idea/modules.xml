@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidProject.iml" filepath="$PROJECT_DIR$/AndroidProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DynamicUIDemo/DynamicUIDemo.iml" filepath="$PROJECT_DIR$/DynamicUIDemo/DynamicUIDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DynamicUISdk/DynamicUISdk.iml" filepath="$PROJECT_DIR$/DynamicUISdk/DynamicUISdk.iml" />
+    </modules>
+  </component>
+</project>
