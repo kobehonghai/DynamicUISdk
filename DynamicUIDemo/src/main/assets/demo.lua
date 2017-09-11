@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-button1 = require "LButton"
+button = require "LButton"
 button2 = require "LButton"
 
 
