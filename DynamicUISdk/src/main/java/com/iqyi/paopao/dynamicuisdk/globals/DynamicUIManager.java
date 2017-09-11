@@ -23,6 +23,8 @@ public class DynamicUIManager {
 
     private static DynamicUIManager manger;
 
+    private ImageLoader mImageLoader;
+
     private DynamicUIManager() {
         mGlobals = JsePlatform.standardGlobals();
     }
@@ -42,8 +44,10 @@ public class DynamicUIManager {
         return mGlobals;
     }
 
-    public void loadCustomLib(LuaValue binder) {
-        getGlobals().load(binder);
+    public void loadCustomLib(LuaValue... binders) {
+        for (LuaValue binder : binders) {
+            getGlobals().load(binder);
+        }
         LoadState.install(getGlobals());
     }
 
@@ -64,5 +68,11 @@ public class DynamicUIManager {
         return LuaValue.NIL;
     }
 
+    public ImageLoader getImageLoader() {
+        return mImageLoader;
+    }
 
+    public void setImageLoader(ImageLoader imageLoader) {
+        mImageLoader = imageLoader;
+    }
 }

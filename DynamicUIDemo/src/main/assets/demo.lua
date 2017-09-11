@@ -6,10 +6,11 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-button = require "LButton"
+image = require "LImage"
 
-button.setText("demo")
-button.setTextColor ("#AEEEEE")
+image.setWH(500,500)
+image.setUrl("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2355408163,617371546&fm=27&gp=0.jpg")
+
 
 function buttonClick()
     print("点击事件")
