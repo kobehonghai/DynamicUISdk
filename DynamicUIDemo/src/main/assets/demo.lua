@@ -13,7 +13,7 @@ button.setTextColor ("#AEEEEE")
 
 function buttonClick()
     print("点击事件")
-    button.setOnClickAction("com.iqyi.paopao.demo.ListDemoActivity")
+    button.setOnClickAction("com.iqyi.paopao.demo.listitem.ListDemoActivity")
     --这里或者return来处理
 end
 

@@ -1,9 +1,11 @@
-package com.iqyi.paopao.demo;
+package com.iqyi.paopao.demo.listitem;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.iqyi.paopao.demo.R;
 
 public class ListDemoActivity extends FragmentActivity {
     @Override
