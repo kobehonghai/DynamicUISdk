@@ -21,16 +21,19 @@
  ******************************************************************************/
 package org.luaj.vm2;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.Reader;
+import android.view.ViewGroup;
 
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.DebugLib;
 import org.luaj.vm2.lib.IoLib;
 import org.luaj.vm2.lib.PackageLib;
 import org.luaj.vm2.lib.ResourceFinder;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.io.Reader;
+import java.util.Stack;
 
 /**
  * Global environment used by luaj.  Contains global variables referenced by executing lua.
@@ -113,6 +116,8 @@ import org.luaj.vm2.lib.ResourceFinder;
  * @see org.luaj.vm2.luajc.LuaJC
  */
 public class Globals extends LuaTable {
+
+	public ViewGroup mCurContainer;
 
 	/** The current default input stream. */
 	public InputStream STDIN  = null;
@@ -455,4 +460,6 @@ public class Globals extends LuaTable {
 			i = 0;
 		}
 	}
+
+
 }
