@@ -51,16 +51,17 @@ public class DynamicUIManager {
         getGlobals().mCurContainer = view;
     }
 
-    public void loadLuaScript(Context context, String name) {
+    public LuaValue loadLuaScript(Context context, String name) {
         try {
             LuaValue chunk = getGlobals().load(
                     new InputStreamReader(context.getResources().getAssets().open(name)),
                     "chunkname");
             chunk.call();
+            return chunk;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return LuaValue.NIL;
     }
 
 
