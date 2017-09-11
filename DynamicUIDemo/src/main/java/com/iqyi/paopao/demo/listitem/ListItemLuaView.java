@@ -1,4 +1,4 @@
-package com.iqyi.paopao.demo;
+package com.iqyi.paopao.demo.listitem;
 
 import android.content.Context;
 import android.util.Log;

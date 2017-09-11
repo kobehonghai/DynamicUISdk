@@ -1,4 +1,4 @@
-package com.iqyi.paopao.demo;
+package com.iqyi.paopao.demo.listitem;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.iqyi.paopao.demo.R;
 
 import java.util.ArrayList;
 

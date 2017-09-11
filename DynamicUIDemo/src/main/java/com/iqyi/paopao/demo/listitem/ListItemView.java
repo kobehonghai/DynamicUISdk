@@ -1,4 +1,4 @@
-package com.iqyi.paopao.demo;
+package com.iqyi.paopao.demo.listitem;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.iqyi.paopao.demo.R;
 
 /**
  * Created by liuhonghai on 2017/9/8.
