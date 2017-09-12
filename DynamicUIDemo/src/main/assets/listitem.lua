@@ -11,20 +11,21 @@ local paramsLib=LRelativeLayout:newLayoutParams()
 local numText=LTextView:newTextView()
 local icon=LImage:newImageView()
 local contribution=LTextView:newTextView()
+local paramsLib=LRelativeLayout:newLayoutParams()
 
 
-function getView()
-
-    --[[numText:setId(1000)
-    icon:setId(1001)]]
-
+function getView() 
     local textParam=paramsLib:getParams(paramsLib.WRAP_CONTENT,paramsLib.WRAP_CONTENT)
     LRelativeLayout.addView(numText,textParam)
     local iconParam=paramsLib:getParams(200,100,paramsLib.BELOW,numText:getId())
     LRelativeLayout.addView(icon,iconParam)
 
+
     local contributionParam=paramsLib:getParams(paramsLib.WRAP_CONTENT,paramsLib.WRAP_CONTENT,paramsLib.ALIGN_PARENT_RIGHT)
     LRelativeLayout.addView(contribution,contributionParam)
+
+    LRelativeLayout.removeView(numText)
+
 
     return LRelativeLayout.getContent()
 end
