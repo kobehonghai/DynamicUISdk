@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.iqyi.paopao.dynamicuisdk.globals.DynamicUIManager;
 import com.iqyi.paopao.dynamicuisdk.view.lib.ButtonLib;
+import com.iqyi.paopao.dynamicuisdk.view.lib.ImageLib;
 import com.iqyi.paopao.dynamicuisdk.view.lib.RelativeLayoutLib;
+import com.iqyi.paopao.dynamicuisdk.view.lib.TextViewLib;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -33,7 +35,7 @@ public class ListItemLuaView implements ResourceFinder {
 
     public ListItemLuaView(Context context) {
         mContext=context;
-        DynamicUIManager.getInstance().loadCustomLib(new RelativeLayoutLib(mContext));//绑定所有需要的组件
+        DynamicUIManager.getInstance().loadCustomLib(new RelativeLayoutLib(mContext),new TextViewLib(mContext),new ImageLib(mContext));//绑定所有需要的组件
         this.globals = DynamicUIManager.getInstance().getGlobals();
         globals.finder = this;
         globals.set("context", CoerceJavaToLua.coerce(mContext));

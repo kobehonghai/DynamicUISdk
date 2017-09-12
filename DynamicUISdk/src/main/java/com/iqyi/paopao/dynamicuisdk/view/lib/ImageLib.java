@@ -1,5 +1,6 @@
 package com.iqyi.paopao.dynamicuisdk.view.lib;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,6 +15,8 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
+import org.luaj.vm2.lib.ZeroArgFunction;
+import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
 /**
  * Created by LiYong on 2017/9/11.
@@ -23,49 +26,42 @@ import org.luaj.vm2.lib.TwoArgFunction;
 
 public class ImageLib extends BaseFunctionLib {
 
-    private ImageView imageView;
+    private Context mContext;
 
-    public ImageLib() {
+    public ImageLib(Context context) {
         super("LImage");
+        mContext=context;
     }
 
     @Override
     public void setMethod(LuaTable luaTable) {
-        luaTable.set("setWH", new setWH());
-        luaTable.set("setUrl", new setUrl());
+        luaTable.set("newImageView", new NewImageView());
     }
 
-    @Override
-    public LuaValue createCreator(LuaValue env, LuaValue metaTable) {
-        Globals g = env.checkglobals();
-        imageView = new ImageView(g.mCurContainer.getContext());
-        g.mCurContainer.addView(imageView);
-        return super.createCreator(env, metaTable);
-    }
-
-    private class setUrl extends OneArgFunction {
+    private class NewImageView extends ZeroArgFunction {
         @Override
-        public LuaValue call(LuaValue arg) {
-            final String url = arg.checkjstring();
+        public LuaValue call() {
+            ImageLib.LImageView imageView=new ImageLib.LImageView(mContext);
+            return CoerceJavaToLua.coerce(imageView);
+        }
+    }
+
+    public class LImageView extends android.support.v7.widget.AppCompatImageView{
+
+        public LImageView(Context context) {
+            super(context);
+            ViewUtil.setId(this);
+        }
+
+        public void setNetUrl(String url){
             final ImageLoader imageLoader = DynamicUIManager.getInstance().getImageLoader();
             if (imageLoader != null) {
-                imageLoader.loadImage(imageView, Uri.parse(url), null);
+                imageLoader.loadImage(this, Uri.parse(url), null);
             }
-            return LuaValue.valueOf(url);
         }
     }
 
-    private class setWH extends TwoArgFunction {
-        @Override
-        public LuaValue call(LuaValue arg1, LuaValue arg2) {
-            ViewGroup.LayoutParams params = ViewUtil.getLayoutParams(imageView);
-            params.width = arg1.checkint();
-            params.height = arg2.checkint();
-            imageView.setLayoutParams(params);
 
-            return LuaValue.NIL;
-        }
-    }
 
 
 }
