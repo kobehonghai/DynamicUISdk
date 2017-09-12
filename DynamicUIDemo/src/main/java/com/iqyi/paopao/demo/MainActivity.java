@@ -21,18 +21,19 @@ public class MainActivity extends Activity implements ButtonClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initConfig();
-
-        RelativeLayout rootView = findViewById(R.id.layout);
-        mDynamicUIManager.setContainerView(rootView);
-        chunk = mDynamicUIManager.loadLuaScript(this, "demo.lua");//加载对应业务的脚本
     }
 
     private void initConfig(){
+
         mDynamicUIManager = DynamicUIManager.getInstance();
+        RelativeLayout rootView = findViewById(R.id.layout);
+        mDynamicUIManager.setContainerView(rootView);
+
         mDynamicUIManager.setImageLoader(FrescoImageLoader.with(getApplicationContext()));
         mDynamicUIManager.loadCustomLib(new ButtonLib(this));//绑定所有需要的组件
+
+        chunk = mDynamicUIManager.loadLuaScript(this, "demo.lua");//加载对应业务的脚本
     }
 
 
