@@ -4,31 +4,27 @@
 -- Time: 20:41
 --
 require "LRelativeLayout"
-
-local mContext=context
-local Textview=luajava.bindClass('android.widget.TextView')
-local ImageView=luajava.bindClass("android.widget.ImageView")
+require "LTextView"
+require "LImage"
 
 local paramsLib=LRelativeLayout:newLayoutParams()
-
-local numText
-local icon
+local numText=LTextView:newTextView()
+local icon=LImage:newImageView()
+local contribution=LTextView:newTextView()
 
 
 function getView()
-    numText=Textview.new(mContext)
-    icon=ImageView.new(mContext)
 
-    numText:setId(1000)
-    icon:setId(1001)
-    icon:setBackgroundColor(0xffffff33)
+    --[[numText:setId(1000)
+    icon:setId(1001)]]
 
     local textParam=paramsLib:getParams(paramsLib.WRAP_CONTENT,paramsLib.WRAP_CONTENT)
     LRelativeLayout.addView(numText,textParam)
     local iconParam=paramsLib:getParams(200,100,paramsLib.BELOW,numText:getId())
     LRelativeLayout.addView(icon,iconParam)
 
-    LRelativeLayout.removeView(numText)
+    local contributionParam=paramsLib:getParams(paramsLib.WRAP_CONTENT,paramsLib.WRAP_CONTENT,paramsLib.ALIGN_PARENT_RIGHT)
+    LRelativeLayout.addView(contribution,contributionParam)
 
     return LRelativeLayout.getContent()
 end
@@ -36,5 +32,13 @@ end
 function setData(data)
     if numText ~=nil then
         numText:setText(""..data:getNum().."hello world")
+    end
+
+    if icon ~=nil then
+        icon:setNetUrl("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2355408163,617371546&fm=27&gp=0.jpg")
+    end
+
+    if contribution ~=nil then
+        contribution:setText(""..data:getNum().."hello")
     end
 end
