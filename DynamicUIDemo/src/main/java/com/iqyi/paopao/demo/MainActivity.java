@@ -7,8 +7,6 @@ import android.widget.RelativeLayout;
 import com.iqyi.paopao.demo.imageloader.FrescoImageLoader;
 import com.iqyi.paopao.dynamicuisdk.globals.DynamicUIManager;
 import com.iqyi.paopao.dynamicuisdk.view.lib.ButtonLib;
-import com.iqyi.paopao.dynamicuisdk.view.lib.ImageLib;
-import com.iqyi.paopao.dynamicuisdk.view.lib.RelativeLayoutLib;
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.ButtonClickListener;
 
 import org.luaj.vm2.LuaValue;
@@ -16,19 +14,25 @@ import org.luaj.vm2.LuaValue;
 
 public class MainActivity extends Activity implements ButtonClickListener {
 
-    LuaValue chunk;
+    private DynamicUIManager mDynamicUIManager;
+    private LuaValue chunk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RelativeLayout rootView = findViewById(R.id.layout);
-        DynamicUIManager.getInstance().setContainerView(rootView);
-        DynamicUIManager.getInstance().setImageLoader(FrescoImageLoader.with(getApplicationContext()));
+        initConfig();
 
-        DynamicUIManager.getInstance().loadCustomLib(new ButtonLib(this));//绑定所有需要的组件
-        chunk = DynamicUIManager.getInstance().loadLuaScript(this, "demo.lua");//加载对应业务的脚本
+        RelativeLayout rootView = findViewById(R.id.layout);
+        mDynamicUIManager.setContainerView(rootView);
+        chunk = mDynamicUIManager.loadLuaScript(this, "demo.lua");//加载对应业务的脚本
+    }
+
+    private void initConfig(){
+        mDynamicUIManager = DynamicUIManager.getInstance();
+        mDynamicUIManager.setImageLoader(FrescoImageLoader.with(getApplicationContext()));
+        mDynamicUIManager.loadCustomLib(new ButtonLib(this));//绑定所有需要的组件
     }
 
 

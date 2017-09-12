@@ -1,7 +1,6 @@
 package com.iqyi.paopao.demo.imageloader;
 
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -26,7 +25,6 @@ public class GlideImageLoader implements ImageLoader {
                     @Override
                     public boolean onException(Exception e, Uri model, Target<GlideDrawable> target,
                             boolean isFirstResource) {
-                        Log.d("","");
                         return false;
                     }
 
@@ -34,7 +32,6 @@ public class GlideImageLoader implements ImageLoader {
                     public boolean onResourceReady(GlideDrawable resource, Uri model,
                             Target<GlideDrawable> target,
                             boolean isFromMemoryCache, boolean isFirstResource) {
-                        Log.d("","");
                         return false;
                     }
                 }).into(imageView);

@@ -1,6 +1,5 @@
 package com.iqyi.paopao.demo.imageloader;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -61,7 +60,7 @@ public class FrescoImageLoader implements ImageLoader {
 
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         final DataSource<CloseableReference<CloseableImage>>
-                dataSource = imagePipeline.fetchDecodedImage(imageRequest, null);
+                dataSource = imagePipeline.fetchDecodedImage(imageRequest, mContext);
 
         dataSource.subscribe(new BaseBitmapDataSubscriber() {
 
