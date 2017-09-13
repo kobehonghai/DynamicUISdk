@@ -16,37 +16,51 @@ local contributionText =LTextView:newTextView()
 local rootRelativeLayout=LRelativeLayout:newLayout()
 local innerLayout =LLinearLayout:newLayout()
 local outerLayout =LLinearLayout:newLayout()
-print("outerLayout",outerLayout)
+
 
 function getView()
 
-    nameText:setSingleLine()
+    nameText:setLSingleLine()
+    nameText:setGravity(numText.CENTER)
 
-    local numParam=LRelativeLayout.newLayoutParams(rootRelativeLayout.WRAP_CONTENT,rootRelativeLayout.WRAP_CONTENT)
+    numText:setGravity(numText.CENTER)
+    numText:setLTextBold()
+    numText:setLTextColor("#000000")
+    numText:setLTextSize(20)
+
+    contributionText:setGravity(numText.LEFT)
+
+    local numParam=LRelativeLayout.newLayoutParams(100,100)
+    numParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addView(numText,numParam)
 
     local iconParam=LRelativeLayout.newLayoutParams(200,100)
     iconParam:addRule(rootRelativeLayout.RIGHT_OF,numText:getId())
+    iconParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addView(iconImg,iconParam)
 
     local contributionParam=LRelativeLayout.newLayoutParams(rootRelativeLayout.WRAP_CONTENT,rootRelativeLayout.WRAP_CONTENT)
     contributionParam:addRule(rootRelativeLayout.ALIGN_PARENT_RIGHT)
-    contributionParam:setMargins(0,0,200,0)
+    contributionParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
+    contributionParam:setMargins(20,0,20,0)
     rootRelativeLayout:addView(contributionText,contributionParam)
 
     local nameAreaParam=LRelativeLayout.newLayoutParams(rootRelativeLayout.MATCH_PARENT,rootRelativeLayout.WRAP_CONTENT)
     nameAreaParam:addRule(rootRelativeLayout.RIGHT_OF,iconImg:getId())
     nameAreaParam:addRule(rootRelativeLayout.LEFT_OF,contributionText:getId())
+    nameAreaParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addView(outerLayout,nameAreaParam)
 
     local innerLayoutParam=LLinearLayout.newLayoutParams(outerLayout.WRAP_CONTENT,outerLayout.WRAP_CONTENT)
     outerLayout:addView(innerLayout,innerLayoutParam)
 
-    local nameParam=LLinearLayout.newLayoutParams(0,innerLayout.WRAP_CONTENT,1)
+    local nameParam=LLinearLayout.newLayoutParams(0,innerLayout.MATCH_PARENT,1)
     local levelParam=LLinearLayout.newLayoutParams(100,100)
     innerLayout:setOrientation(innerLayout.HORIZONTAL)
     innerLayout:addView(nameText,nameParam)
     innerLayout:addView(levelImg,levelParam)
+
+    rootRelativeLayout:setPadding(0,50,0,50);
 
     return rootRelativeLayout
 end

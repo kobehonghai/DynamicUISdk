@@ -62,6 +62,8 @@ public class RelativeLayoutLib extends BaseFunctionLib {
 
         public static final int ALIGN_PARENT_RIGHT = RelativeLayout.ALIGN_PARENT_RIGHT;
 
+        public static final int CENTER_VERTICAL = RelativeLayout.CENTER_VERTICAL;
+
         public LRelativeLayout(Context context) {
             super(context);
         }
@@ -71,6 +73,8 @@ public class RelativeLayoutLib extends BaseFunctionLib {
 
         public LLayoutParams(int w, int h) {
             super(w, h);
+
         }
+
     }
 }
