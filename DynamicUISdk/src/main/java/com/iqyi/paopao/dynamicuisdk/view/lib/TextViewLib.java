@@ -1,20 +1,13 @@
 package com.iqyi.paopao.dynamicuisdk.view.lib;
 
 import android.content.Context;
-import android.util.AndroidException;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.iqyi.paopao.dynamicuisdk.utils.ViewUtil;
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.BaseFunctionLib;
 
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import org.luaj.vm2.lib.jse.CoerceLuaToJava;
 
 /**
  * Created by liuhonghai on 2017/9/12.
@@ -30,8 +23,9 @@ public class TextViewLib extends BaseFunctionLib {
     }
 
     @Override
-    public void setMethod(LuaTable luaTable) {
-        luaTable.set("newTextView", new TextViewLib.NewTextView());
+    public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
+        metaTable.set("newTextView", new TextViewLib.NewTextView());
+        return metaTable;
     }
 
     private class NewTextView extends ZeroArgFunction {

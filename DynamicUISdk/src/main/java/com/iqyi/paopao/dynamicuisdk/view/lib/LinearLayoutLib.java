@@ -6,7 +6,6 @@ import android.widget.RelativeLayout;
 
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.BaseFunctionLib;
 
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
@@ -32,11 +31,12 @@ public class LinearLayoutLib extends BaseFunctionLib {
 
 
     @Override
-    public void setMethod(LuaTable luaTable) {
-        luaTable.set("newLayoutParams", new LinearLayoutLib.NewLayoutParams());
-        luaTable.set("addView", new LinearLayoutLib.AddView());
-        luaTable.set("removeView", new LinearLayoutLib.RemoveView());
-        luaTable.set("getContent", new LinearLayoutLib.GetContent());
+    public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
+        metaTable.set("newLayoutParams", new LinearLayoutLib.NewLayoutParams());
+        metaTable.set("addView", new LinearLayoutLib.AddView());
+        metaTable.set("removeView", new LinearLayoutLib.RemoveView());
+        metaTable.set("getContent", new LinearLayoutLib.GetContent());
+        return metaTable;
     }
 
     private class NewLayoutParams extends ZeroArgFunction {

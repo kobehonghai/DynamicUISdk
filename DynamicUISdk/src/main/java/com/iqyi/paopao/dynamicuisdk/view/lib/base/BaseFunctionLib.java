@@ -10,9 +10,9 @@ import org.luaj.vm2.lib.TwoArgFunction;
  * Version:
  */
 
-public abstract class BaseFunctionLib extends TwoArgFunction {
+public class BaseFunctionLib extends TwoArgFunction {
 
-    protected String luaName;
+    private String luaName;
 
     public BaseFunctionLib(String luaName) {
         this.luaName = luaName;
@@ -21,17 +21,17 @@ public abstract class BaseFunctionLib extends TwoArgFunction {
     @Override
     public LuaValue call(LuaValue modname, LuaValue env) {
         LuaTable luaTable = tableOf();
-        setMethod(luaTable);
-        env.set(luaName,createCreator(env,luaTable));
+        env.set(luaName, createLuaTable(env, luaTable));
         env.get("package").get("loaded").set(luaName, luaTable);
         return luaTable;
     }
 
-    public abstract void setMethod(LuaTable luaTable);
-
-    public LuaValue createCreator(LuaValue env, LuaValue metaTable) {
-        return metaTable;
+    public String getLuaName() {
+        return luaName;
     }
 
+    public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
+        return metaTable;
+    }
 
 }

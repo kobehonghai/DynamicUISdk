@@ -2,19 +2,13 @@ package com.iqyi.paopao.dynamicuisdk.view.lib;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.iqyi.paopao.dynamicuisdk.globals.DynamicUIManager;
 import com.iqyi.paopao.dynamicuisdk.globals.ImageLoader;
 import com.iqyi.paopao.dynamicuisdk.utils.ViewUtil;
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.BaseFunctionLib;
 
-import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.lib.OneArgFunction;
-import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 
@@ -34,8 +28,9 @@ public class ImageLib extends BaseFunctionLib {
     }
 
     @Override
-    public void setMethod(LuaTable luaTable) {
-        luaTable.set("newImageView", new NewImageView());
+    public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
+        metaTable.set("newImageView", new NewImageView());
+        return metaTable;
     }
 
     private class NewImageView extends ZeroArgFunction {

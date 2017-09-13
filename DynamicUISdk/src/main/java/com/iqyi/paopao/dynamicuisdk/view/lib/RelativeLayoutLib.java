@@ -5,7 +5,6 @@ import android.widget.RelativeLayout;
 
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.BaseFunctionLib;
 
-import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
@@ -29,9 +28,10 @@ public class RelativeLayoutLib extends BaseFunctionLib {
 
 
     @Override
-    public void setMethod(LuaTable luaTable) {
-        luaTable.set("newLayout", new RelativeLayoutLib.NewLayout());
-        luaTable.set("newLayoutParams", new RelativeLayoutLib.NewLayoutParams());
+    public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
+        metaTable.set("newLayout", new RelativeLayoutLib.NewLayout());
+        metaTable.set("newLayoutParams", new RelativeLayoutLib.NewLayoutParams());
+        return metaTable;
     }
 
     private class NewLayout extends ZeroArgFunction {
