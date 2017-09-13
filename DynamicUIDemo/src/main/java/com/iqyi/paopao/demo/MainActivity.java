@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import com.iqyi.paopao.demo.imageloader.FrescoImageLoader;
+import com.iqyi.paopao.dynamicuisdk.globals.Constants;
 import com.iqyi.paopao.dynamicuisdk.globals.DynamicUIManager;
 import com.iqyi.paopao.dynamicuisdk.view.lib.ActivityLib;
 import com.iqyi.paopao.dynamicuisdk.view.lib.ButtonLib;
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
     }
 
     private void initConfig() {
+        Constants.init(this);
         mDynamicUIManager = DynamicUIManager.getInstance();
         RelativeLayout rootView = findViewById(R.id.layout);
         mDynamicUIManager.setContainerView(rootView);
