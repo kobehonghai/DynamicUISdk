@@ -5,6 +5,7 @@ import android.widget.RelativeLayout;
 
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.BaseFunctionLib;
 
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
@@ -25,7 +26,6 @@ public class RelativeLayoutLib extends BaseFunctionLib {
         mContext = context;
         relativeLayout = new RelativeLayout(mContext);
     }
-
 
     @Override
     public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
@@ -58,6 +58,7 @@ public class RelativeLayoutLib extends BaseFunctionLib {
 
         public static final int BELOW = RelativeLayout.BELOW;
         public static final int RIGHT_OF = RelativeLayout.RIGHT_OF;
+        public static final int LEFT_OF = RelativeLayout.LEFT_OF;
 
         public static final int ALIGN_PARENT_RIGHT = RelativeLayout.ALIGN_PARENT_RIGHT;
 

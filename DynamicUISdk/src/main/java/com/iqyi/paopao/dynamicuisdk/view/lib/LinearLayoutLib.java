@@ -2,12 +2,15 @@ package com.iqyi.paopao.dynamicuisdk.view.lib;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.iqyi.paopao.dynamicuisdk.view.lib.base.BaseFunctionLib;
 
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
+import org.luaj.vm2.lib.ThreeArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -19,100 +22,64 @@ import org.luaj.vm2.lib.jse.CoerceLuaToJava;
 
 public class LinearLayoutLib extends BaseFunctionLib {
 
-    private RelativeLayout relativeLayout;
     private Context mContext;
 
 
     public LinearLayoutLib(Context context) {
-        super("LRelativeLayout");
+        super("LLinearLayout");
         mContext = context;
-        relativeLayout = new RelativeLayout(mContext);
     }
-
 
     @Override
     public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
         metaTable.set("newLayoutParams", new LinearLayoutLib.NewLayoutParams());
-        metaTable.set("addView", new LinearLayoutLib.AddView());
-        metaTable.set("removeView", new LinearLayoutLib.RemoveView());
-        metaTable.set("getContent", new LinearLayoutLib.GetContent());
+        metaTable.set("newLayout", new LinearLayoutLib.NewLayout());
         return metaTable;
     }
 
-    private class NewLayoutParams extends ZeroArgFunction {
+    private class NewLayout extends ZeroArgFunction {
         @Override
         public LuaValue call() {
-            LayoutParamsLib layoutParamsLib = new LayoutParamsLib();
-            return CoerceJavaToLua.coerce(layoutParamsLib);
+            LLinearLayout layout = new LLinearLayout(mContext);
+            return CoerceJavaToLua.coerce(layout);
         }
     }
 
-    private class AddView extends TwoArgFunction {
+    private class NewLayoutParams extends ThreeArgFunction {
         @Override
-        public LuaValue call(LuaValue view, LuaValue layoutParam) {
-            addView((View) CoerceLuaToJava.coerce(view, View.class), (RelativeLayout.LayoutParams) CoerceLuaToJava.coerce(layoutParam, RelativeLayout.LayoutParams.class));
-            return CoerceJavaToLua.coerce(relativeLayout);
-        }
-    }
-
-    private class RemoveView extends OneArgFunction {
-        @Override
-        public LuaValue call(LuaValue view) {
-            View v=(View) CoerceLuaToJava.coerce(view, View.class);
-            if (relativeLayout!=null && v!=null){
-                relativeLayout.removeView(v);
+        public LuaValue call(LuaValue w,LuaValue h,LuaValue weight) {
+            LLayoutParams layoutParams;
+            if (weight.isnil()){
+                layoutParams= new LLayoutParams((int) CoerceLuaToJava.coerce(w, Integer.class),(int)CoerceLuaToJava.coerce(h,Integer.class));
+            }else {
+                layoutParams= new LLayoutParams((int) CoerceLuaToJava.coerce(w, Integer.class),(int)CoerceLuaToJava.coerce(h,Integer.class),(float) CoerceLuaToJava.coerce(weight,Float.class));
             }
-            return CoerceJavaToLua.coerce(relativeLayout);
+            return CoerceJavaToLua.coerce(layoutParams);
         }
     }
 
-    private class GetContent extends ZeroArgFunction {
-        @Override
-        public LuaValue call() {
-            return CoerceJavaToLua.coerce(relativeLayout);
+    public class LLinearLayout extends LinearLayout{
+
+        public static final int VERTICAL = LinearLayout.VERTICAL;
+        public static final int HORIZONTAL = LinearLayout.HORIZONTAL;
+
+        public static final int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
+        public static final int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+        public LLinearLayout(Context context) {
+            super(context);
         }
     }
 
-    private void addView(View view, RelativeLayout.LayoutParams viewParam) {
-        relativeLayout.addView(view, viewParam);
-    }
 
+    public class LLayoutParams extends LinearLayout.LayoutParams{
 
-    public static class LayoutParamsLib {
-
-        public LayoutParamsLib() {
+        public LLayoutParams(int width, int height) {
+            super(width, height);
         }
 
-        public static final int MATCH_PARENT = RelativeLayout.LayoutParams.MATCH_PARENT;
-        public static final int WRAP_CONTENT = RelativeLayout.LayoutParams.WRAP_CONTENT;
-
-        public static final int BELOW = RelativeLayout.BELOW;
-        public static final int RIGHT_OF = RelativeLayout.RIGHT_OF;
-
-
-        public static RelativeLayout.LayoutParams getParams(int w, int h) {
-            return new RelativeLayout.LayoutParams(w, h);
+        public LLayoutParams(int width, int height, float weight) {
+            super(width, height, weight);
         }
-
-        public static RelativeLayout.LayoutParams getParams(int w, int h, int rule) {
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(w, h);
-            layoutParams.addRule(rule);
-            return layoutParams;
-        }
-
-        public static RelativeLayout.LayoutParams getParams(int w, int h, int rule, int anchorId) {
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(w, h);
-            layoutParams.addRule(rule, anchorId);
-            return layoutParams;
-        }
-
-        public static RelativeLayout.LayoutParams setMargin(RelativeLayout.LayoutParams params, int left, int top, int right, int bottom) {
-            if (params != null) {
-                params.setMargins(left, top, right, bottom);
-            }
-            return params;
-        }
-
-
     }
 }

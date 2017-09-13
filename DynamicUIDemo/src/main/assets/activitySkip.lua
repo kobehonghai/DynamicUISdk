@@ -18,7 +18,7 @@ button.setText("demo")
 button.setTextColor("#AEEEEE")
 button.onClick(function()
     print("跳转Activity")
-    activity.skip("com.iqyi.paopao.demo.SecondActivity")
+    activity.skip("com.iqyi.paopao.demo.listitem.ListDemoActivity")
 end)
 
 
