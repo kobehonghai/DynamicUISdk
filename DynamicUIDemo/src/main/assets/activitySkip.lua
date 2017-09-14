@@ -18,6 +18,7 @@ button.setText("demo")
 button.setTextColor("#AEEEEE")
 button.onClick(function()
     print("跳转Activity")
+    activity.setIntentKV("key", "value");
     activity.skip("com.iqyi.paopao.demo.listitem.ListDemoActivity")
 end)
 

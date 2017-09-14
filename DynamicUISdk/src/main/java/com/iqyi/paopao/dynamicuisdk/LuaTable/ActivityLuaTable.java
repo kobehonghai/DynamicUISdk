@@ -5,6 +5,7 @@ import android.content.Intent;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
+import org.luaj.vm2.lib.TwoArgFunction;
 
 /**
  * Created by LiYong on 2017/9/13.
@@ -16,8 +17,9 @@ public class ActivityLuaTable {
 
     private Globals mGlobals;
     private LuaValue mMetaTable;
+    private Intent mIntent;
 
-    public ActivityLuaTable(Globals globals, LuaValue metaTable) {
+    private ActivityLuaTable(Globals globals, LuaValue metaTable) {
         this.mGlobals = globals;
         this.mMetaTable = metaTable;
         init();
@@ -25,22 +27,27 @@ public class ActivityLuaTable {
 
     private void init() {
         mMetaTable.set("skip", new skip());
+        mMetaTable.set("setIntentKV", new setIntentKV());
     }
 
     private class skip extends OneArgFunction {
-
         @Override
         public LuaValue call(LuaValue arg) {
-            String route = null;
-            try {
-                route = arg.checkjstring();
-                Intent intent = new Intent(mGlobals.mCurContainer.getContext(),
-                        Class.forName(route));
-                mGlobals.mCurContainer.getContext().startActivity(intent);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            String className = arg.checkjstring();
+            mIntent.setClassName(mGlobals.mCurContainer.getContext(), className);
+            mGlobals.mCurContainer.getContext().startActivity(mIntent);
+            return LuaValue.NIL;
+        }
+    }
+
+    private class setIntentKV extends TwoArgFunction {
+        @Override
+        public LuaValue call(LuaValue arg1, LuaValue arg2) {
+            if (mIntent == null) {
+                mIntent = new Intent();
             }
-            return LuaValue.valueOf(route);
+            mIntent.putExtra(arg1.checkjstring(), arg2.checkjstring());
+            return null;
         }
     }
 
