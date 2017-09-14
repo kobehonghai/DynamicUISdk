@@ -34,7 +34,7 @@ function getView()
     numParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addView(numText,numParam)
 
-    local iconParam=LRelativeLayout.newLayoutParams(200,100)
+    local iconParam=LRelativeLayout.newLayoutParams(100,100)
     iconParam:addRule(rootRelativeLayout.RIGHT_OF,numText:getId())
     iconParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addView(iconImg,iconParam)
@@ -71,8 +71,8 @@ function setData(data)
     end
 
     if iconImg ~=nil then
-        iconImg:setNetUrl("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2355408163,617371546&fm=27&gp=0.jpg")
-        iconImg:setBackgroundColor(0x7f0a001c)
+        iconImg:setCornerRadius(50)
+        iconImg:setNetUrl("http://img0.imgtn.bdimg.com/it/u=1247521936,2341282586&fm=27&gp=0.jpg")
     end
 
     if nameText ~=nil then

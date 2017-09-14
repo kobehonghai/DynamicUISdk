@@ -5,9 +5,9 @@ import android.net.Uri;
 
 import com.iqyi.paopao.lua.globals.DynamicUIManager;
 import com.iqyi.paopao.lua.imagloader.ImageLoader;
-import com.iqyi.paopao.lua.imagloader.image.RoundParam;
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
 import com.iqyi.paopao.lua.utils.ViewUtil;
+import com.iqyi.paopao.lua.view.image.RoundedImageView;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.ZeroArgFunction;
@@ -43,22 +43,13 @@ public class ImageLib extends BaseFunctionLib {
         }
     }
 
-    public class LImageView extends android.support.v7.widget.AppCompatImageView {
-
-        private RoundParam roundParam;
+    public class LImageView extends RoundedImageView {
 
         public LImageView(Context context) {
             super(context);
             ViewUtil.setId(this);
-        }
-
-        public void setRoundAsCircle(boolean roundAsCircle) {
-            if (roundParam == null) {
-                roundParam = new RoundParam();
-
-
-            }
-            roundParam.setRoundAsCircle(roundAsCircle);
+            setScaleType(ScaleType.CENTER_CROP);
+            setOval(true);
         }
 
         public void setNetUrl(String url) {

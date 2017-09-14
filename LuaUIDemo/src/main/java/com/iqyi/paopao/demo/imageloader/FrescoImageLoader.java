@@ -56,7 +56,7 @@ public class FrescoImageLoader implements ImageLoader {
     public void loadImage(final ImageView imageView, Uri uri, final Callback callback) {
         ImageRequest imageRequest = ImageRequestBuilder
                 .newBuilderWithSource(uri)
-                .setResizeOptions(ResizeOptions.forDimensions(512,512))
+                .setResizeOptions(ResizeOptions.forDimensions(512, 512))
                 .setRotationOptions(RotationOptions.autoRotate())
                 .build();
 
