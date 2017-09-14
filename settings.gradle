@@ -1,1 +1,1 @@
-include ':DynamicUIDemo', ':DynamicUISdk'
+include ':LuaUIDemo', ':LuaUISdk'

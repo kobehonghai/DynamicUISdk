@@ -8,8 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/DynamicUIDemo" />
-            <option value="$PROJECT_DIR$/DynamicUISdk" />
+            <option value="$PROJECT_DIR$/LuaUIDemo" />
+            <option value="$PROJECT_DIR$/LuaUISdk" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
