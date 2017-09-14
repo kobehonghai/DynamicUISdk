@@ -21,6 +21,7 @@
  ******************************************************************************/
 package org.luaj.vm2;
 
+import android.content.Context;
 import android.view.ViewGroup;
 
 import org.luaj.vm2.lib.BaseLib;
@@ -118,6 +119,8 @@ import java.util.Stack;
 public class Globals extends LuaTable {
 
 	public ViewGroup mCurContainer;
+
+	public Context mContext;
 
 	/** The current default input stream. */
 	public InputStream STDIN  = null;
@@ -460,6 +463,11 @@ public class Globals extends LuaTable {
 			i = 0;
 		}
 	}
+
+	public Context getContext(){
+		return mContext != null ? mContext : mCurContainer.getContext();
+	}
+
 
 
 }

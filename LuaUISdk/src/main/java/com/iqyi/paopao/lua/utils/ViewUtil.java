@@ -3,6 +3,7 @@ package com.iqyi.paopao.lua.utils;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,6 +27,17 @@ public class ViewUtil {
         return new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
     }
+
+    public static RelativeLayout.LayoutParams getRLayoutParams(View view) {
+        if (view != null && view.getLayoutParams() != null) {
+            return (RelativeLayout.LayoutParams)view.getLayoutParams();
+        }
+        return new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+
+
 
     public static void setId(View view) {
         if (view != null) {

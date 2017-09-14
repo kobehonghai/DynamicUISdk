@@ -1,6 +1,6 @@
 package com.iqyi.paopao.lua.lib;
 
-import com.iqyi.paopao.lua.LuaTable.ButtonLuaTable;
+import com.iqyi.paopao.lua.LuaTable.ButtonLuaTableBuilder;
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
 
 import org.luaj.vm2.Globals;
@@ -22,6 +22,6 @@ public class ButtonLib extends BaseFunctionLib {
     @Override
     public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
         Globals g = env.checkglobals();
-        return ButtonLuaTable.valueOf(g,metaTable);
+        return ButtonLuaTableBuilder.valueOf(g,metaTable);
     }
 }

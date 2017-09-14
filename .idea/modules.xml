@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidProject.iml" filepath="$PROJECT_DIR$/AndroidProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/DynamicUIDemo/DynamicUIDemo.iml" filepath="$PROJECT_DIR$/DynamicUIDemo/DynamicUIDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/DynamicUISdk/DynamicUISdk.iml" filepath="$PROJECT_DIR$/DynamicUISdk/DynamicUISdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LuaUIDemo/LuaUIDemo.iml" filepath="$PROJECT_DIR$/LuaUIDemo/LuaUIDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LuaUISdk/LuaUISdk.iml" filepath="$PROJECT_DIR$/LuaUISdk/LuaUISdk.iml" />
     </modules>
   </component>
 </project>

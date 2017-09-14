@@ -1,7 +1,7 @@
 package com.iqyi.paopao.lua.lib;
 
 
-import com.iqyi.paopao.lua.LuaTable.ActivityLuaTable;
+import com.iqyi.paopao.lua.LuaTable.ActivityLuaTableBuilder;
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
 
 import org.luaj.vm2.LuaValue;
@@ -20,6 +20,6 @@ public class ActivityLib extends BaseFunctionLib {
 
     @Override
     public LuaValue createLuaTable(LuaValue env, LuaValue metaTable) {
-        return ActivityLuaTable.valueOf(env.checkglobals(), metaTable);
+        return ActivityLuaTableBuilder.valueOf(env.checkglobals(), metaTable);
     }
 }

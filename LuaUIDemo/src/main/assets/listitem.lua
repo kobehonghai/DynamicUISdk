@@ -7,6 +7,7 @@ require "LRelativeLayout"
 require "LLinearLayout"
 require "LTextView"
 require "LImage"
+require "layoutConstant"
 
 local numText=LTextView:newTextView()
 local iconImg =LImage:newImageView()
@@ -34,7 +35,7 @@ function getView()
     numParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addLView(numText,numParam,"num")
 
-    local iconParam=LRelativeLayout.newLayoutParams(200,100)
+    local iconParam=LRelativeLayout.newLayoutParams(100,100)
     iconParam:addRule(rootRelativeLayout.RIGHT_OF,numText:getId())
     iconParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     rootRelativeLayout:addLView(iconImg,iconParam,"icon")
@@ -71,7 +72,8 @@ function setData(data,view)
     numText:setText(""..data:getNum())
 
     local iconImg=view:getLChildView("icon")
-    iconImg:setNetUrl("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2355408163,617371546&fm=27&gp=0.jpg")
+    iconImg:setCornerRadius(50)
+    iconImg:setNetUrl("http://img0.imgtn.bdimg.com/it/u=1247521936,2341282586&fm=27&gp=0.jpg")
     iconImg:setBackgroundColor(-256)
 
     local contributionText=view:getLChildView("contributionParam")
@@ -86,5 +88,8 @@ function setData(data,view)
 
     local levelImg=innerLayout:getLChildView("level")
     levelImg:setBackgroundColor(-156)
+
+    print("测试值为"..layoutConstant.ABOVE)
+
 
 end

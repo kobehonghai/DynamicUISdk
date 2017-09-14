@@ -13,13 +13,13 @@ import org.luaj.vm2.lib.TwoArgFunction;
  * Version:
  */
 
-public class ActivityLuaTable {
+public class ActivityLuaTableBuilder {
 
     private Globals mGlobals;
     private LuaValue mMetaTable;
     private Intent mIntent;
 
-    private ActivityLuaTable(Globals globals, LuaValue metaTable) {
+    private ActivityLuaTableBuilder(Globals globals, LuaValue metaTable) {
         this.mGlobals = globals;
         this.mMetaTable = metaTable;
         init();
@@ -52,7 +52,7 @@ public class ActivityLuaTable {
     }
 
     public static LuaValue valueOf(Globals globals, LuaValue metaTable) {
-        return new ActivityLuaTable(globals, metaTable).mMetaTable;
+        return new ActivityLuaTableBuilder(globals, metaTable).mMetaTable;
     }
 
 
