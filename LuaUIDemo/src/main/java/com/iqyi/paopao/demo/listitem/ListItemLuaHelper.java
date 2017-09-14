@@ -23,14 +23,14 @@ import java.io.InputStream;
  * Created by liuhonghai on 2017/9/8.
  */
 
-public class ListItemLuaView implements ResourceFinder {
+public class ListItemLuaHelper implements ResourceFinder {
 
     public final Globals globals;
     public View view;
     public TextView errorTip;
     private Context mContext;
 
-    public ListItemLuaView(Context context) {
+    public ListItemLuaHelper(Context context) {
         mContext=context;
         DynamicUIManager.getInstance().loadCustomLib(new RelativeLayoutLib(mContext),new LinearLayoutLib(mContext),new TextViewLib(mContext),new ImageLib(mContext));//绑定所有需要的组件
         this.globals = DynamicUIManager.getInstance().getGlobals();
@@ -48,7 +48,7 @@ public class ListItemLuaView implements ResourceFinder {
             try {
                 LuaValue luaValue= (LuaValue) f.invoke(CoerceJavaToLua.coerce("lua文本"));
                 view= (View) CoerceLuaToJava.coerce(luaValue, android.view.View.class);
-                Log.i("ListItemLuaView",view.toString());
+                Log.i("ListItemLuaHelper",view.toString());
                 return view;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -57,11 +57,11 @@ public class ListItemLuaView implements ResourceFinder {
         return errorTip;
     }
 
-    public void setData(Object data){
+    public void setData(Object data,View view){
         LuaValue f = globals.get("setData");
         if (!f.isnil()) {
             try {
-                f.invoke(CoerceJavaToLua.coerce(data));
+                f.invoke(CoerceJavaToLua.coerce(data),CoerceJavaToLua.coerce(view));
             } catch (Exception e) {
                 e.printStackTrace();
             }

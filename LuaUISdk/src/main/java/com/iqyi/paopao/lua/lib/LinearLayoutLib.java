@@ -1,6 +1,7 @@
 package com.iqyi.paopao.lua.lib;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
@@ -10,6 +11,9 @@ import org.luaj.vm2.lib.ThreeArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.CoerceLuaToJava;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by liuhonghai on 2017/9/11.
@@ -61,8 +65,19 @@ public class LinearLayoutLib extends BaseFunctionLib {
         public static final int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
         public static final int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
 
+        private Map<String,View> viewMap = new HashMap<>();
+
         public LLinearLayout(Context context) {
             super(context);
+        }
+
+        public void addLView(View child, LinearLayout.LayoutParams params, String key){
+            this.addView(child,params);
+            this.viewMap.put(key,child);
+        }
+
+        public View getLChildView(String key){
+            return this.viewMap.get(key);
         }
     }
 

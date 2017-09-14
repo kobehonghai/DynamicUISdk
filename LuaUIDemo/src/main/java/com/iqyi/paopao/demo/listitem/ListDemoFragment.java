@@ -53,6 +53,7 @@ public class ListDemoFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    private boolean islua = true;
 
     private class MyAdapter extends BaseAdapter{
         ArrayList<Data> data=new ArrayList<>();
@@ -78,34 +79,50 @@ public class ListDemoFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            //ViewHolder holder;
-            //ListItemView itemView;
-            ListItemLuaView itemLuaView;
-            if (view ==null){
-                //holder=new ViewHolder();
-                //itemView=new ListItemView(viewGroup.getContext());
-                itemLuaView=new ListItemLuaView(viewGroup.getContext());
-                view = itemLuaView.getView();
-                //holder.num=itemView.getNum();
-                /*holder.icon=itemView.getIcon();
-                holder.name=itemView.getName();
-                holder.level=itemView.getLevel();
-                holder.contribution=itemView.getContribution();*/
-                view.setTag(itemLuaView);
+            ViewHolder holder = null;
+            ListItemView itemView;
+            ListItemLuaHelper itemHolder = null;
+            if (view == null) {
+                if (islua){
+                    itemHolder = new ListItemLuaHelper(viewGroup.getContext());
+                    view = itemHolder.getView();
+                    view.setTag(itemHolder);
+                    Log.i("Test", "position=" + i + "---" + itemHolder.hashCode());
+                    Log.i("Test", "position=" + i + "---" + view.hashCode());
+                }else {
+                    holder = new ViewHolder();
+                    itemView = new ListItemView(viewGroup.getContext());
+                    holder.num = itemView.getNum();
+                    holder.icon = itemView.getIcon();
+                    holder.name = itemView.getName();
+                    holder.level = itemView.getLevel();
+                    holder.contribution = itemView.getContribution();
+                    view=itemView;
+                    view.setTag(holder);
+                }
+            } else {
+                if (islua){
+                    itemHolder = (ListItemLuaHelper) view.getTag();
+                    Log.i("Test", "复用 position=" + i + " " + itemHolder.hashCode());
+                    Log.i("Test", "position=" + i + "---" + view.hashCode());
+                }else {
+                    holder= (ViewHolder) view.getTag();
+                }
 
-                Log.i("Test","position="+i+"---"+itemLuaView.toString());
-            }else {
-                //holder= (ViewHolder) view.getTag();
-                itemLuaView= (ListItemLuaView) view.getTag();
-                Log.i("Test","复用 position="+i);
             }
-            itemLuaView.setData(data.get(i));
-            //Data d=data.get(i);
-            //holder.num.setText(d.getNum()+"");
-           /* holder.icon.setImageResource(R.mipmap.ic_launcher);
-            holder.name.setText(d.getName());
-            holder.level.setImageResource(R.mipmap.ic_launcher);
-            holder.contribution.setText("贡献"+d.getContribution()+"影响力");*/
+
+            if (islua) {
+                itemHolder.setData(data.get(i),view);
+            } else {
+                Data d = data.get(i);
+                holder.num.setText(d.getNum() + "");
+                holder.icon.setImageResource(R.mipmap.ic_launcher);
+                holder.name.setText(d.getName());
+                holder.level.setImageResource(R.mipmap.ic_launcher);
+                holder.contribution.setText("贡献" + d.getContribution() + "影响力");
+            }
+
+
             return view;
         }
     }

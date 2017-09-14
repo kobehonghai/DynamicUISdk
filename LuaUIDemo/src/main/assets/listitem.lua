@@ -32,60 +32,59 @@ function getView()
 
     local numParam=LRelativeLayout.newLayoutParams(100,100)
     numParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
-    rootRelativeLayout:addView(numText,numParam)
+    rootRelativeLayout:addLView(numText,numParam,"num")
 
-    local iconParam=LRelativeLayout.newLayoutParams(100,100)
+    local iconParam=LRelativeLayout.newLayoutParams(200,100)
     iconParam:addRule(rootRelativeLayout.RIGHT_OF,numText:getId())
     iconParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
-    rootRelativeLayout:addView(iconImg,iconParam)
+    rootRelativeLayout:addLView(iconImg,iconParam,"icon")
 
     local contributionParam=LRelativeLayout.newLayoutParams(rootRelativeLayout.WRAP_CONTENT,rootRelativeLayout.WRAP_CONTENT)
     contributionParam:addRule(rootRelativeLayout.ALIGN_PARENT_RIGHT)
     contributionParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
     contributionParam:setMargins(20,0,20,0)
-    rootRelativeLayout:addView(contributionText,contributionParam)
+    rootRelativeLayout:addLView(contributionText,contributionParam,"contributionParam")
 
     local nameAreaParam=LRelativeLayout.newLayoutParams(rootRelativeLayout.MATCH_PARENT,rootRelativeLayout.WRAP_CONTENT)
     nameAreaParam:addRule(rootRelativeLayout.RIGHT_OF,iconImg:getId())
     nameAreaParam:addRule(rootRelativeLayout.LEFT_OF,contributionText:getId())
     nameAreaParam:addRule(rootRelativeLayout.CENTER_VERTICAL)
-    rootRelativeLayout:addView(outerLayout,nameAreaParam)
+    rootRelativeLayout:addLView(outerLayout,nameAreaParam,"outlayout")
 
     local innerLayoutParam=LLinearLayout.newLayoutParams(outerLayout.WRAP_CONTENT,outerLayout.WRAP_CONTENT)
-    outerLayout:addView(innerLayout,innerLayoutParam)
+    outerLayout:addLView(innerLayout,innerLayoutParam,"innerlayout")
 
     local nameParam=LLinearLayout.newLayoutParams(0,innerLayout.MATCH_PARENT,1)
     local levelParam=LLinearLayout.newLayoutParams(100,100)
     innerLayout:setOrientation(innerLayout.HORIZONTAL)
-    innerLayout:addView(nameText,nameParam)
-    innerLayout:addView(levelImg,levelParam)
+    innerLayout:addLView(nameText,nameParam,"name")
+    innerLayout:addLView(levelImg,levelParam,"level")
 
     rootRelativeLayout:setPadding(0,50,0,50);
 
     return rootRelativeLayout
 end
 
-function setData(data)
-    if numText ~=nil then
-        numText:setText(""..data:getNum())
-    end
+function setData(data,view)
 
-    if iconImg ~=nil then
-        iconImg:setCornerRadius(50)
-        iconImg:setNetUrl("http://img0.imgtn.bdimg.com/it/u=1247521936,2341282586&fm=27&gp=0.jpg")
-    end
+    local numText=view:getLChildView("num")
+    numText:setText(""..data:getNum())
 
-    if nameText ~=nil then
-        nameText:setText(""..data:getNum().."namesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
-    end
+    local iconImg=view:getLChildView("icon")
+    iconImg:setNetUrl("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2355408163,617371546&fm=27&gp=0.jpg")
+    iconImg:setBackgroundColor(-256)
 
-    if levelImg ~=nil then
-        levelImg:setBackgroundColor(-256)
-    end
+    local contributionText=view:getLChildView("contributionParam")
+    contributionText:setText(""..data:getNum().."contribution")
 
-    if contributionText ~=nil then
-        contributionText:setText(""..data:getNum().."contribution")
-    end
 
+    local outerLayout=view:getLChildView("outlayout")
+    local innerLayout=outerLayout:getLChildView("innerlayout")
+
+    local nameText=innerLayout:getLChildView("name")
+    nameText:setText(""..data:getNum().."namesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
+
+    local levelImg=innerLayout:getLChildView("level")
+    levelImg:setBackgroundColor(-156)
 
 end
