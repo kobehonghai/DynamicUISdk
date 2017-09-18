@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
+import com.iqyi.paopao.lua.utils.DimenUtil;
+import com.iqyi.paopao.lua.utils.ViewUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.ThreeArgFunction;
@@ -69,6 +71,7 @@ public class LinearLayoutLib extends BaseFunctionLib {
 
         public LLinearLayout(Context context) {
             super(context);
+            ViewUtil.setId(this);
         }
 
         public void addLView(View child, LinearLayout.LayoutParams params, String key){
@@ -85,11 +88,11 @@ public class LinearLayoutLib extends BaseFunctionLib {
     public class LLayoutParams extends LinearLayout.LayoutParams{
 
         public LLayoutParams(int width, int height) {
-            super(width, height);
+            super(DimenUtil.dpiToPx(width), DimenUtil.dpiToPx(height));
         }
 
         public LLayoutParams(int width, int height, float weight) {
-            super(width, height, weight);
+            super(DimenUtil.dpiToPx(width), DimenUtil.dpiToPx(height), weight);
         }
     }
 }

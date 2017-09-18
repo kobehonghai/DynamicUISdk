@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
+import com.iqyi.paopao.lua.utils.DimenUtil;
+import com.iqyi.paopao.lua.utils.ViewUtil;
 
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
@@ -71,6 +73,7 @@ public class RelativeLayoutLib extends BaseFunctionLib {
 
         public LRelativeLayout(Context context) {
             super(context);
+            ViewUtil.setId(this);
         }
 
         public void addLView(View child, RelativeLayout.LayoutParams params, String key){
@@ -86,7 +89,7 @@ public class RelativeLayoutLib extends BaseFunctionLib {
     public class LLayoutParams extends RelativeLayout.LayoutParams {
 
         public LLayoutParams(int w, int h) {
-            super(w, h);
+            super(DimenUtil.dpiToPx(w), DimenUtil.dpiToPx(h));
 
         }
 

@@ -48,7 +48,12 @@ public class DimenUtil {
      * @return
      */
     public static int dpiToPx(float dpi) {
-        return (int) (dpi * Constants.sScale);
+        if (dpi<0){
+            return (int) dpi;
+        }else {
+            return (int) (dpi * Constants.sScale);
+        }
+
     }
 
     /**

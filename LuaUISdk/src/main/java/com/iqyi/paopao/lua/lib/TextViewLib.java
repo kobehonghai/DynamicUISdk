@@ -8,6 +8,7 @@ import android.view.Gravity;
 
 
 import com.iqyi.paopao.lua.lib.base.BaseFunctionLib;
+import com.iqyi.paopao.lua.utils.DimenUtil;
 import com.iqyi.paopao.lua.utils.ViewUtil;
 
 import org.luaj.vm2.LuaValue;
@@ -67,7 +68,7 @@ public class TextViewLib extends BaseFunctionLib {
         }
 
         public void setLTextSize(float size){
-            this.setTextSize(size);
+            this.setTextSize(DimenUtil.spToPx(size));
         }
 
 
